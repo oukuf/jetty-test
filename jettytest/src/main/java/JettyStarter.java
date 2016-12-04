@@ -23,8 +23,6 @@ public class JettyStarter {
 
 		WebAppContext webAppContext = new WebAppContext();
 
-		String contextPath = null;
-
 		Class<?> clazz = JettyStarter.class;
 		ProtectionDomain protectionDomain = clazz.getProtectionDomain();
 		CodeSource codeSource = protectionDomain.getCodeSource();
@@ -35,9 +33,12 @@ public class JettyStarter {
 		// ex) file:/C:/pleiades/workspace/jettytest/target/classes/
 		// LOG.trace("externalForm:" + externalForm);
 
+		String contextPath = null;
+
 		if (externalForm.endsWith(".war")) {
 
 			webAppContext.setWar(externalForm);
+
 			String[] externalForms = externalForm.split("/");
 			String warName = externalForms[externalForms.length - 1];
 			contextPath = warName.replaceAll("\\.war$", "");
@@ -46,6 +47,7 @@ public class JettyStarter {
 
 			webAppContext.setResourceBase("src/main/webapp");
 			webAppContext.setDescriptor("src/main/webapp/WEB-INF/web.xml");
+
 			String[] externalForms = externalForm.split("/");
 			for (String s : externalForms) {
 				if (s.equals("target") || s.equals("classes")) {

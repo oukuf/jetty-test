@@ -7,14 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/servlet")
-public class SampleServlet extends HttpServlet {
+@WebServlet("/innerservlet")
+public class InnerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		res.getWriter().println("executable war.");
+		res.getWriter().println("<a href=\"./\">index.jsp</a>");
+		res.getWriter().println("<h2>" + this.getClass().getSimpleName() + "</h2>");
 	}
 
 }
